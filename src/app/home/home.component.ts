@@ -16,12 +16,13 @@ export class HomeComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    forkJoin([
+    forkJoin(
       this.dataService.getCategories(),
       this.dataService.getProducts()
-    ])
+    )
     .subscribe(
       response => {
+        console.info(JSON.stringify(response));
         this.categories = response[0][0]['categories'];
         this.products = response[1][0]['products'];
       },
